@@ -1,0 +1,95 @@
+body{
+    font-family: Sans-Serif;
+    background-color: #1E1E1E;
+}
+
+.title{
+    margin-left: 15px;
+    color: rgb(255, 255, 255);
+}
+
+#list{
+    margin-left: 15px;
+    list-style: none;
+    width: 50%;
+    padding: 15px;
+    background-color: grey;
+}
+
+#list>li{
+    color: rgb(255, 255, 255);
+    padding: 10px 15px;
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+#list>li>div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 5px;
+    margin-top: 3px;
+    font-size: 15px;
+}
+
+#list>li>div>a{
+    color: #FFF;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+#list>a{
+    color: grey;
+    background-color: beige;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 15px;
+    margin: 10px 0px;
+    text-align: center;
+    display:block;
+}
+
+
+#list>li>img{
+    width: 12px;
+    margin-left: 10px;
+    filter: invert(100%);
+}
+
+#addTask, #editTask{
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 30px 15px;
+    margin: 15px;
+    gap: 15px;
+}
+
+#addTask>input[type=text],#editTask>input[type=text]{
+    padding: 10px 10px;
+}
+
+#addTask>select,#editTask>select{
+    padding: 10px 10px;
+}
+
+#addTask>input[type=submit],#editTask>input[type=submit]{
+    padding: 10px 10px;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <form action="/list/editTask?id={{id}}"  id="editTask" method="post">
+        {% csrf_token %}
+        <label for="newTask">Edit Task </label>
+        <input type="text" name="name" id="newTask" placeholder="New name" value="{{name}}">
+        <select name="category" id="category">
+            {% for i in categories %}
+                <option value="{{i.id}}"> {{i.name}} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
+
+

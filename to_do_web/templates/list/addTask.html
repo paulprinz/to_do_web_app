@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}" type="text/css">
+</head>
+<body>
+    <form action="/list/addTask" id="addTask" method="post">
+        {% csrf_token %}
+        <label for="newTask">Add Task</label>
+        <input type="text" name="name" id="newTask" placeholder="Name for new task">
+        <select name="category" id="category">
+            {% for i in categories %}
+                <option value="{{i.id}}"> {{i.name}} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Create Task">
+    </form>
+</body>
+</html>
+
+

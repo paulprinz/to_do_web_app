@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <h1 class='title'> To-Do List </h1>
+    <ul id='list'>
+        {% for i in to_do_list %}
+        <li style="background-color: {{i.category.color}}" title="{{i.id}}">
+            {% if i.achieved %}
+                <input type="checkbox" name="achieved{{i.id}}" checked class="achieved" >
+            {% else %}
+                <input type="checkbox" name="achieved{{i.id}}" class="achieved" >
+            {% endif %}
+            <div>
+                <a href="/list/editTask?id={{i.id}}">{{i.name}}</a>
+                <span>{{i.category.name}}</span>
+            </div>
+            {% load static %}
+            <img src="{% static 'img/trash-solid.svg' %}" alt="remove task">
+        </li>
+        {% endfor %}
+        <a class="addTaskButton" href="/list/addTask">
+            +
+        </a>
+    </ul>
+    <script>
+        function changeAchieved(e){
+            let parent = e.target.parentElement
+            let id = parent.title
+            let achieved
+            if(e.target.checked){
+                achieved = true
+            } else {
+                achieved = false
+            }
+            fetch("/list/changeAchieved", {
+                method: "POST",
+                body: JSON.stringify({achieved, id}),
+                credentials: "same-origin",
+                headers: { "X-CSRFToken": "{{csrf_token}}" }
+            })
+            .then(r => {
+                console.log(id, "was updated")
+                location.reload()
+            })
+            .catch(e => console.log(e))
+        }
+        function deleteTask(e){
+            let parent = e.target.parentElement
+            let id = parent.title
+            fetch("/list/deleteTask", {
+                method: "DELETE",
+                body: JSON.stringify({id}),
+                credentials: "same-origin",
+                headers: { "X-CSRFToken": "{{csrf_token}}" }
+            })
+            .then(r => parent.parentElement.removeChild(parent))
+            .catch(e => console.log(e))
+        }
+
+        let listItems = document.getElementById('list')
+        for(let i = 0; i < listItems.children.length; i++){
+            listItems.children[i].getElementsByTagName("img")[0].addEventListener('click', deleteTask)
+            listItems.children[i].getElementsByClassName("achieved")[0].addEventListener('click', changeAchieved)
+        }
+    </script>
+</body>
+</html>
+
+
+
