@@ -10,3 +10,4 @@
 4. On command line navigate to the project folder and issue command:
    * `python manage.py runserver`
 5. Copy `http://127.0.0.1:8000/`, open browser of choice and paste url 
+
